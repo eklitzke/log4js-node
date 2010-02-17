@@ -3,7 +3,7 @@ require("jspec");
 
 log4js = require("log4js-node");
 
-var sys = require("sys"), posix = require("posix");
+var sys = require("sys"), fs = require("fs");
 
 quit = process.exit
 print = sys.puts
@@ -11,7 +11,7 @@ print = sys.puts
 readFile = function(path) {
   var result;
   try {
-    posix
+    fs
       .cat(path)
       .addCallback(
         function(contents){ result = contents; }
@@ -29,7 +29,7 @@ if (process.ARGV[2]) {
   JSpec.exec('spec/spec.' + process.ARGV[2] + '.js');
 } else {
   var files;
-  posix
+  fs
     .readdir('spec/')
     .addCallback(
       function(dirFiles) { files = dirFiles; }
